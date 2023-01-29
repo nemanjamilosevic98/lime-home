@@ -5,6 +5,7 @@
 /integration/bazel/bazel-*
 *.log
 /node_modules/
+.angular/
 
 # CircleCI temporary file for cache key computation.
 # See `save_month_to_file` in `.circleci/config.yml`.
@@ -12,6 +13,7 @@ month.txt
 
 # Include when developing application packages.
 pubspec.lock
+package-lock.json
 .c9
 .idea/
 .devcontainer/*
