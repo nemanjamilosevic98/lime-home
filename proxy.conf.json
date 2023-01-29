@@ -6,7 +6,7 @@
       "port": 3001
     },
     "pathRewrite": {
-      "^/api/": "//"
+      "^/api/": "/"
     },
     "secure": false,
     "changeOrigin": true,
