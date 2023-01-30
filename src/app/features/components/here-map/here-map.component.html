@@ -1,1 +1,8 @@
 <div #map id="map"></div>
+<ng-container *ngIf="hotels != null && hotels.length > 0">
+  <div id="hotelsSlider">
+    <ng-container *ngFor="let hotel of hotels">
+      <app-hotel-info-card class="hotel-info-card" [hotelInfo]="hotel"></app-hotel-info-card>
+    </ng-container>
+  </div>
+</ng-container>

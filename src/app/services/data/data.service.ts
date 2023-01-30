@@ -1,31 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, of, Subject, Subscriber } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of, Subject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import {query} from '@angular/animations';
+import { Hotel } from 'src/app/shared/models/hotel.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  hotels: any[] = [];
-  markerSelectedEvent: Subject<string> = new Subject<string>();
+  hotels: Hotel[] = [];
+  private markerSelectedSubject: Subject<number> = new Subject<number>();
   // default location, intersection of equator and prime meridian
-  private _currentLocation: [latitude: number, longitude: number] = [0, 0];
+  private _selectedHotelIndex = 0;
 
-  get currentLocation(): [latitude: number, longitude: number] {
-    return this._currentLocation;
+  get selectedHotelIndex(): number {
+    return this._selectedHotelIndex;
   }
-  set currentLocation(position: [latitude: number, longitude: number]) {
-    this._currentLocation = position;
+  set selectedHotelIndex(index: number) {
+    if (this.selectedHotelIndex != index) {
+      this._selectedHotelIndex = index;
+      this.markerSelectedSubject.next(index);
+    }
   }
 
   constructor(
     private _httpClient: HttpClient
   ) {  }
-
+/*
   queryLocation(query: string) {
     const [latitude, longitude] = this._currentLocation;
     const params = new HttpParams();
@@ -51,7 +53,7 @@ export class DataService {
           }
         )
       );
-  }
+  }*/
 
   getHotels(): Observable<{}>{
     return this._httpClient.get('/api/hotels').pipe(
@@ -67,5 +69,9 @@ export class DataService {
         return of([]);
       }
     ));
+  }
+
+  getSelectedHotelIndex() : Observable<number> {
+    return this.markerSelectedSubject.asObservable();
   }
 }

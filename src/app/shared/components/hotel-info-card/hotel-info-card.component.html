@@ -1,0 +1,15 @@
+<div class="hotel-card-info">
+  <div class="hotel-info-container">
+    <img alt="image" src="assets/images/hotel-thumbnail.png" class="hotel-image" />
+    <div class="hotel-details">
+      <div class="label-bold">{{hotelInfo?.address?.city}}</div>
+      <div class="label-bold">{{hotelInfo?.address?.street}}</div>
+      <div class="label label-distance">{{getKmDistance(hotelInfo?.distance)}} KM FROM CITY CENTER</div>
+      <div class="label-bold">£{{price}}</div>
+      <div class="label">{{hotelInfo?.title}}</div>
+    </div>
+  </div>
+  <div>
+    <button>Book</button>
+  </div>
+</div>
