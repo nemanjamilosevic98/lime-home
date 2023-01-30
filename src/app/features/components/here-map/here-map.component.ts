@@ -4,6 +4,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { DataService } from 'src/app/services/data/data.service';
 import { Hotel } from 'src/app/shared/models/hotel.model';
 import { environment } from 'src/environments/environment';
+import { SCROLL_BEHAVIOR_SMOOTH } from 'src/app/constants/general.constants';
 
 @Component({
   selector: 'app-here-map',
@@ -17,7 +18,9 @@ export class HereMapComponent implements OnInit, OnDestroy {
   @ViewChild('map') mapDiv?: ElementRef;
 
   hotels = new Array<any>();
-  selectedHotel = 0;
+  selectedHotelIndex = 0;
+
+  @ViewChild('hotelsSlider') hotelsSlider: any;
 
   private readonly onDestroy = new Subject<void>();
 
@@ -39,8 +42,9 @@ export class HereMapComponent implements OnInit, OnDestroy {
     this.dataService.getSelectedHotelIndex()
       .pipe(takeUntil(this.onDestroy))
       .subscribe(index => {
-        this.selectedHotel = index;
-        console.log(this.selectedHotel);
+        this.selectedHotelIndex = index;
+        const cardWidth = (this.hotelsSlider.nativeElement.childNodes[0] as HTMLDivElement).clientWidth;
+        this.hotelsSlider.nativeElement.scrollTo({left: cardWidth * index, behavior: SCROLL_BEHAVIOR_SMOOTH, inline: 'center', block: 'center'});
       });
   }
 
@@ -50,13 +54,14 @@ export class HereMapComponent implements OnInit, OnDestroy {
   }
 
   addHotelMarker(lat: number, lng: number, index: number) {
-    const icon = new H.map.Icon('assets/icons/home-icon.svg');
+    const icon = new H.map.Icon('assets/icons/home-icon' + (index === 0 ? '-active' : '') + '.svg');
     const marker = new H.map.Marker({ lat: lat, lng: lng }, {data: index, icon: icon});
     marker.addEventListener('tap', () => {
       this.map?.getObjects().forEach(object=> {
         const currentMarker = (object as H.map.Marker);
         const icon = new H.map.Icon('assets/icons/home-icon' + (marker.getData() == currentMarker.getData() ? '-active' : '') + '.svg');
         currentMarker.setIcon(icon);
+        this.map?.setCenter({lat: this.hotels[index].position.lat, lng:this.hotels[index].position.lng})
       });
       this.dataService.selectedHotelIndex = marker.getData();
     });

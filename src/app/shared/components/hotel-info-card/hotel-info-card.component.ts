@@ -10,6 +10,7 @@ export class HotelInfoCardComponent implements OnInit {
 
   @Input('hotelInfo') hotelInfo: Hotel | null = null;
   price: number;
+
   constructor() {
     this.price = this.getPrice();
    }
