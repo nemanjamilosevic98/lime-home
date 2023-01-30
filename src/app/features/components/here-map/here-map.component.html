@@ -2,8 +2,8 @@
 <ng-container *ngIf="hotels != null && hotels.length > 0">
   <div #hotelsSlider id="hotelsSlider">
     <ng-container *ngFor="let hotel of hotels; let i = index;">
-      <app-hotel-info-card class="hotel-info-card" [hotelInfo]="hotel" [ngClass]="{'selected': i == selectedHotelIndex}"
-        (click)="onCardClick(i)"></app-hotel-info-card>
+      <app-hotel-info-card class="hotel-info-card" [hotelInfo]="hotel" [index]="i"
+        [ngClass]="{'selected': i == selectedHotelIndex}" (click)="onCardClick(i)"></app-hotel-info-card>
     </ng-container>
   </div>
 </ng-container>

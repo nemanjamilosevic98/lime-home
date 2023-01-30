@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Hotel } from '../../models/hotel.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hotel-info-card',
@@ -9,9 +10,10 @@ import { Hotel } from '../../models/hotel.model';
 export class HotelInfoCardComponent implements OnInit {
 
   @Input('hotelInfo') hotelInfo: Hotel | null = null;
+  @Input('index') index: number;
   price: number;
 
-  constructor() {
+  constructor(private router: Router) {
     this.price = this.getPrice();
    }
 
@@ -27,6 +29,10 @@ export class HotelInfoCardComponent implements OnInit {
 
   getPrice() {
     return Number((Math.random() * 100 + 50).toFixed(0));
+  }
+
+  async openBookingForm() {
+    this.router.navigate(['/booking']);
   }
 
 }

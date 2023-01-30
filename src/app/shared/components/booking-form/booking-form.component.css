@@ -1,0 +1,52 @@
+@import url(https://fonts.googleapis.com/css?family=Muli);
+
+* {
+  margin: 0;
+  font-family: 'Muli', sans-serif;
+}
+
+body {
+  background-color: #222222;
+}
+
+h1 {
+  margin-bottom: 30px;
+  font-size: 1.6em;
+  color: #B52E31;
+}
+
+input[type="submit"] {
+  color: #222222;
+}
+
+#wrap {
+  background: #F6F6F6;
+  margin: 0 auto;
+  height: 1000px;
+  text-align: center;
+}
+
+form input {
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 7px;
+  border: none;
+  width: 80%;
+}
+
+form {
+  margin: 0 auto;
+}
+
+.error {
+  height: 30px;
+  color: #B52E31;
+}
+
+input.ng-valid.ng-touched {
+  border: 2px solid green;
+}
+
+input.ng-invalid.ng-touched {
+  border: 2px solid #B52E31;
+}

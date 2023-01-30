@@ -1,0 +1,35 @@
+<div id="wrap" *ngIf="bookingForm" ng-app>
+
+  <form [formGroup]="bookingForm" (submit)="submitForm()">
+    <div class="form_wrap">
+      <h1>Booking Form</h1>
+      <input type="text" formControlName="firstname" placeholder="First Name" ng-minlength="2" />
+      <p class="error"
+        *ngIf="bookingForm.controls['firstname'].invalid && (bookingForm.controls['firstname'].dirty || bookingForm.controls['firstname'].touched)">
+        Please, enter your
+        first name
+      </p>
+      <input type="text" formControlName="lastname" placeholder="Last Name" ng-required="true" />
+      <p class="error"
+        *ngIf="bookingForm.controls['lastname'].invalid && (bookingForm.controls['lastname'].dirty || bookingForm.controls['lastname'].touched)">
+        Please, enter your last
+        name</p>
+      <input type="email" placeholder="Email" formControlName="email" />
+      <p class="error"
+        *ngIf="bookingForm.controls['email'].invalid && (bookingForm.controls['email'].dirty || bookingForm.controls['email'].touched)">
+        Please, enter a valid email</p>
+      <input type="password" placeholder="Password" formControlName="psw" ng-required="true" ng-minlength="6" />
+      <p class="error"
+        *ngIf="bookingForm.controls['psw'].invalid && (bookingForm.controls['psw'].dirty || bookingForm.controls['psw'].touched)">
+        Please, enter a 6 digit password
+      </p>
+    </div>
+
+    <div>
+      <input type="submit" value="Submit" />
+    </div>
+  </form>
+
+
+
+</div>
