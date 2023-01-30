@@ -44,9 +44,9 @@ export class HereMapComponent implements OnInit, OnDestroy, AfterViewInit {
           .pipe(debounce(() => interval(SLIDER_SCROLL_DEBOUNCE_TIME_MS)))
           .subscribe(() => {
             const cardWidth = (this.hotelsSlider.nativeElement.childNodes[0] as HTMLDivElement).clientWidth;
-            this.dataService.selectedHotelIndex = Math.round(((this.hotelsSlider.nativeElement as HTMLDivElement).scrollLeft - cardWidth/4) / cardWidth);
+            this.dataService.selectedHotelIndex = Math.trunc((this.hotelsSlider.nativeElement as HTMLDivElement).scrollLeft/ cardWidth);
             this.refreshMarkerSelection();
-            // this.refreshSlider(this.dataService.selectedHotelIndex); // positioning scroll to the nearest hotel, for free scroll comment this
+            this.refreshSlider(this.dataService.selectedHotelIndex); // positioning scroll to the nearest hotel, for free scroll comment this
           });
         })
       });
@@ -97,8 +97,8 @@ export class HereMapComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   refreshSlider(index: number) {
-    const cardWidth = (this.hotelsSlider.nativeElement.childNodes[0] as HTMLDivElement).clientWidth;
-    this.hotelsSlider.nativeElement.scrollTo({left: cardWidth * index, behavior: SCROLL_BEHAVIOR_SMOOTH, inline: 'center', block: 'center'});
+    const offsetLeft = this.hotelsSlider.nativeElement.childNodes[index*2].offsetLeft;
+    this.hotelsSlider.nativeElement.scrollTo({left: offsetLeft, behavior: SCROLL_BEHAVIOR_SMOOTH, inline: 'center', block: 'center'});
   }
 
   onCardClick(index:number) {
