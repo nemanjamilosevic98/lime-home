@@ -2,14 +2,12 @@
   <div class="hotel-info-container">
     <img alt="image" src="assets/images/hotel-thumbnail.png" class="hotel-image" />
     <div class="hotel-details">
-      <div class="label-bold">{{hotelInfo?.address?.city}}</div>
-      <div class="label-bold">{{hotelInfo?.address?.street}}</div>
+      <div class="label-bold label-city">{{hotelInfo?.address?.city}}</div>
+      <div class="label-bold label-street">{{hotelInfo?.address?.street}}</div>
       <div class="label label-distance">{{getKmDistance(hotelInfo?.distance)}} KM FROM CITY CENTER</div>
-      <div class="label-bold">£{{price}}</div>
-      <div class="label">{{hotelInfo?.title}}</div>
+      <div class="label-bold label-price">£{{price}}</div>
+      <div class="label label-title">{{hotelInfo?.title}}</div>
     </div>
   </div>
-  <div>
-    <button>Book</button>
-  </div>
+  <button class="book-button">Book</button>
 </div>

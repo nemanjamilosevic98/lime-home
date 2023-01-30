@@ -1,5 +1,5 @@
 .hotel-card-info {
-  width: 300px;
+  width: 330px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -9,12 +9,13 @@
   display: flex;
   flex-direction: row;
   gap: 5%;
-  padding-left: 5%;
-  padding-right: 5%;
+  height: 70%;
+  margin: 5%;
+  margin-bottom: 0;
 }
 
 .hotel-image {
-  height: 100px;
+  height: 90%;
 }
 
 .label-bold {
@@ -29,7 +30,47 @@
   font-family: system-ui;
 }
 
+.label-city {
+  font-size: large;
+}
+
+.label-street {
+  font-size: medium;
+  word-break: break-all;
+}
+
+.label-price {
+  font-size: xx-large;
+}
+
+.label-title {
+  font-size: small;
+  color: dimgrey;
+  width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .label-distance {
-  margin-top: 10px;
-  margin-bottom: 20px;
+  color: dimgrey;
+  margin-top: 10%;
+  margin-bottom: 35%;
+}
+
+.book-button {
+  border: 0;
+  background: none;
+  box-shadow: none;
+  border-radius: 0px;
+  width: 90%;
+  background-color: #F7941D;
+  height: 40px;
+  margin: 0 auto;
+  display: block;
+  height: 16%;
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: large;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
