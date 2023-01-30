@@ -11,49 +11,11 @@ export class DataService {
 
   hotels: Hotel[] = [];
   private markerSelectedSubject: Subject<number> = new Subject<number>();
-  // default location, intersection of equator and prime meridian
   private _selectedHotelIndex = 0;
-
-  get selectedHotelIndex(): number {
-    return this._selectedHotelIndex;
-  }
-  set selectedHotelIndex(index: number) {
-    if (this.selectedHotelIndex != index) {
-      this._selectedHotelIndex = index;
-      this.markerSelectedSubject.next(index);
-    }
-  }
 
   constructor(
     private _httpClient: HttpClient
   ) {  }
-/*
-  queryLocation(query: string) {
-    const [latitude, longitude] = this._currentLocation;
-    const params = new HttpParams();
-    params.append('at', `${latitude},${longitude}`);
-    params.append('q', query);
-    params.append('apiKey', environment.apiKey);
-    return this._httpClient.get(`https://discover.search.hereapi.com/v1/discover?apiKey=${environment.apiKey}&at=${latitude},${longitude}&q=${query}`)
-      .pipe(
-        tap(
-          ({ items }: any) => {
-            this.hotels = items.map(
-              (item: any) => {
-                item.price = Math.round((Math.random() * 100) + 1);
-                return item;
-              }
-            );
-          }
-        ),
-        catchError(
-          () => {
-            this.hotels = [];
-            return of([]);
-          }
-        )
-      );
-  }*/
 
   getHotels(): Observable<{}>{
     return this._httpClient.get('/api/hotels').pipe(
@@ -71,7 +33,18 @@ export class DataService {
     ));
   }
 
-  getSelectedHotelIndex() : Observable<number> {
+  getSelectedHotelIndexAsObs() : Observable<number> {
     return this.markerSelectedSubject.asObservable();
   }
+
+  get selectedHotelIndex(): number {
+    return this._selectedHotelIndex;
+  }
+  set selectedHotelIndex(index: number) {
+    if (this.selectedHotelIndex != index) {
+      this._selectedHotelIndex = index;
+      this.markerSelectedSubject.next(index);
+    }
+  }
+
 }
