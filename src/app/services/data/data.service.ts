@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Hotel } from 'src/app/shared/models/hotel.model';
+import { HOTELS } from 'src/app/constants/general.constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  hotels: Hotel[] = [];
+  hotels: any[] = [];
   private markerSelectedSubject: Subject<number> = new Subject<number>();
   private _selectedHotelIndex = 0;
 
@@ -18,19 +19,23 @@ export class DataService {
   ) {  }
 
   getHotels(): Observable<{}>{
-    return this._httpClient.get('/api/hotels').pipe(
-      tap(
-        (response: any) => {
-          this.hotels = response.items;
-          console.log('hotels', this.hotels);
-        }
-      ), catchError(
-      (err) => {
-        console.log(err);
-        this.hotels = [];
-        return of([]);
-      }
-    ));
+    // in order not to deploy the server
+    this.hotels = HOTELS;
+    return of(this.hotels);
+    // for localhost
+    // return this._httpClient.get('/api/hotels').pipe(
+    //   tap(
+    //     (response: any) => {
+    //       this.hotels = response.items;
+    //       console.log('hotels', this.hotels);
+    //     }
+    //   ), catchError(
+    //   (err) => {
+    //     console.log(err);
+    //     this.hotels = [];
+    //     return of([]);
+    //   }
+    // ));
   }
 
   getSelectedHotelIndexAsObs() : Observable<number> {
