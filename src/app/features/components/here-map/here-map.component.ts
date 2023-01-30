@@ -71,8 +71,9 @@ export class HereMapComponent implements OnInit, OnDestroy, AfterViewInit {
         center: {lat: lat, lng: lng},
         zoom: DEFAULT_MAP_ZOOM,
       });
-    var mapEvents = new H.mapevents.MapEvents(this.map); // Enable the event system on the map instance:
-    window.addEventListener('resize', () => this.map.getViewPort().resize()); // resizing
+    const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map)); // Enable the event system on the map instance:
+    const ui = H.ui.UI.createDefault(this.map, layers);
+    window.addEventListener('resize', () => this.map.getViewPort().resize());
   }
 
   addHotelMarker(lat: number, lng: number, index: number) {
