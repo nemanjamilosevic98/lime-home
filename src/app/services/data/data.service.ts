@@ -19,7 +19,9 @@ export class DataService {
   ) {  }
 
   getHotels(): Observable<{}>{
-    return this._httpClient.get('/api/hotels').pipe(
+    // const url = '/api/hotels'; // proxy solution
+    const url = 'https://lime-home-server.onrender.com/hotels';
+    return this._httpClient.get(url).pipe(
       tap(
         (response: any) => {
           this.hotels = response.items;
