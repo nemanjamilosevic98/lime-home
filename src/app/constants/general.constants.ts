@@ -15,4 +15,4 @@ export const MIN_DAYS = 1;
 export const MAX_DAYS = 31;
 export const DIGITS_PATTERN = '^[0-9]*$';
 export const LETTERS_PATTERN = '^[a-zA-Z ]*$';
-export const HOTELS_URL = 'https://lime-home-server.onrender.com/hotels';
+export const HOTELS_URL = 'https://lime-home-express-server.onrender.com/hotels';
