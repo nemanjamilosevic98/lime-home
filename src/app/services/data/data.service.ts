@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { Hotel } from 'src/app/shared/models/hotel.model';
-import { HOTELS } from 'src/app/constants/general.constants';
+import { HOTELS_URL } from 'src/app/constants/general.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +18,8 @@ export class DataService {
   ) {  }
 
   getHotels(): Observable<{}>{
-    // const url = '/api/hotels'; // proxy solution
-    const url = 'https://lime-home-server.onrender.com/hotels';
+    // const url = '/api/hotels'; // proxy solution forlocal
+    const url = HOTELS_URL;
     return this._httpClient.get(url).pipe(
       tap(
         (response: any) => {
