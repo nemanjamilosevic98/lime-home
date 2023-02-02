@@ -19,23 +19,19 @@ export class DataService {
   ) {  }
 
   getHotels(): Observable<{}>{
-    // in order not to deploy the server
-    this.hotels = HOTELS;
-    return of(this.hotels);
-    // for localhost
-    // return this._httpClient.get('/api/hotels').pipe(
-    //   tap(
-    //     (response: any) => {
-    //       this.hotels = response.items;
-    //       console.log('hotels', this.hotels);
-    //     }
-    //   ), catchError(
-    //   (err) => {
-    //     console.log(err);
-    //     this.hotels = [];
-    //     return of([]);
-    //   }
-    // ));
+    return this._httpClient.get('/api/hotels').pipe(
+      tap(
+        (response: any) => {
+          this.hotels = response.items;
+          console.log('hotels', this.hotels);
+        }
+      ), catchError(
+      (err) => {
+        console.log(err);
+        this.hotels = [];
+        return of([]);
+      }
+    ));
   }
 
   getSelectedHotelIndexAsObs() : Observable<number> {
